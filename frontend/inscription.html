@@ -4,24 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./connexion.js"></script>
+    <script src="./inscription.js"></script>
 </head>
 
 <body>
-    <div class ="connexion">
+    <div class ="inscription">
         <div class="content">
-            <h2>Connexion</h2>
-            <form onsubmit="connexion(event)">
+            <h2>Inscription</h2>
+            <form onsubmit="inscription(event)">
                 <input type="text" placeholder="Identifiant" required name = "username" id = "username"/>
                 <input type="password" placeholder="Mot de passe" required name = "password" id = "password"/>
+                <input type="password" placeholder="Confirmation du mot de passe" required name = "password_conf" id = "password_conf"/>
                 <input type="submit" id="submit" value="Valider" />
             </form>
-            <a href = "inscription.html"><p> Pas encore de compte ?</p></a>
          </div>
-    </div>    
+    </div>
 </body>
 
 
 </html>
-
-

@@ -31,21 +31,21 @@ except OperationFailure as e:
 except Exception as e:
     print(f"Erreur bizarre et inattendue: {e}")
 
-def insert_message(text: str, sender_id: int, date: str, target_id: int):
+def insert_message(text: str, sender_name: str, date: str, reciever_name: str):
     """
     Insère un message dans la collection messages
 
     :param message: Le message à insérer (dictionnaire) 
     
-    (ex. {"text": "Bonjour Monde", "sender_id": "2", "date": "2025-04-16", "target_id": "-1"}) 
+    (ex. {"text": "Bonjour Monde", "sender": "Charlotte", "timestamp": "2025-04-16", "reciever": "Louna"}) 
 
-    (target_id = -1 pour chat général, sinon id de l'utilisateur)
+    (reciever_name = "everyone" pour chat général, sinon id de l'utilisateur)
     """
     message = {
         "text": text,
-        "sender_id": sender_id,
-        "date": date,
-        "target_id": target_id
+        "sender": sender_name,
+        "timestamp": date,
+        "reciever": reciever_name
     }
     
     try:
@@ -55,12 +55,12 @@ def insert_message(text: str, sender_id: int, date: str, target_id: int):
         print(f"Erreur lors de l'insertion du message: {e}")
         return None
 
-def get_messages(target_id: int):
+def get_messages(reciever_name: str):
     """
     Récupère les messages d'une certainecible
     """
     try:
-        messages = db.messages.find({"target_id": target_id})
+        messages = db.messages.find({"reciever": reciever_name})
         return list(messages)
     except Exception as e:
         print(f"Erreur lors de la récupération des messages: {e}")

@@ -1,14 +1,20 @@
-
-function connexion(event) {
+function inscription(event) {
     event.preventDefault(); // Empêche le rechargement de la page
 
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
+    const passwordConfirm = document.getElementById("password_conf").value;
 
     const forbidden = /[:\/*]/;
 
-    if (username === "" || password === "") {
+
+    if (username === "" || password === "" || passwordConfirm === "") {
         alert("Veuillez remplir tous les champs !");
+        return;
+    }
+
+    if (password !== passwordConfirm) {
+        alert("Les mots de passe ne correspondent pas !");
         return;
     }
 
@@ -17,14 +23,13 @@ function connexion(event) {
         return;
     }
 
-    fetch(`http://localhost:5000/login/${username}/${password}`, {// c l'api faut hardcodé l'adresse IP
+    fetch(`http://localhost:5000/register/${username}/${password}`, {
         method: "POST"
     })
     .then(response => response.json())
     .then(data => {
         console.log("Réponse de l'API :", data);
-        sessionStorage.setItem('username', username);
-        sessionStorage.setItem('password', password);
+        //alert(`Inscription réussie pour ${username}`);
         // Redirection
         window.location.href = "accueil.html"; 
     })
