@@ -39,3 +39,17 @@
 **Améliorations possibles :**
 - Hashage du mot de passe
 - Statistiques sur les utilisateurs via l'API (nb de messages envoyés, nb de messages reçus, nb de communications entre deux personnes, etc.)
+
+
+## Séance 3 - 05/05/25
+
+**Membres présents :** Charlotte, Mathieu & Louna
+
+**Travail effectué :**
+- Session fonctionnelle 
+- Deconnexion
+- Affichage des utilisateurs en lignes
+
+- Chat global !!!!
+    - Formulaire pour envoie de message (ils sont bien enregistrés dans mongodb)
+    - Récupération des messages envoyées

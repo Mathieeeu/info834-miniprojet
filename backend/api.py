@@ -67,14 +67,20 @@ if __name__ == "__main__":
     def send_message_route(text, sender_name, reciever_name):
         sender_name = sender_name.lower()
         reciever_name = reciever_name.lower()
-        date = datetime.datetime.now().strftime("%Y-%m-%d")
-        return jsonify(mongodb_api.send_message(text, sender_name, date, reciever_name))
+        date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        return jsonify(mongodb_api.insert_message(text, sender_name, date, reciever_name))
     
     # > curl -X GET http://localhost:5000/get_messages/<reciever_name>
     @app.route('/get_messages/<reciever_name>', methods=['GET'])
     def get_messages_route(reciever_name):
         reciever_name = reciever_name.lower()
         return jsonify(mongodb_api.get_messages(reciever_name))
+
+    # > curl -X GET http://localhost:5000/delete_messages/<sender_name>
+    @app.route('/delete_messages_from_user/<sender_name>', methods=['GET'])
+    def delete_messages_route(sender_name):
+        sender_name = sender_name.lower()
+        return jsonify(mongodb_api.delete_messages_from_user(sender_name))
 
     port = 5000
     app.run(host='0.0.0.0', port=port)

@@ -1,3 +1,7 @@
+//============================================================================
+const serverIP = "192.168.43.110"; // ben c'est l'adresse IP du serveur     ||
+//============================================================================
+
 function inscription(event) {
     event.preventDefault(); // Empêche le rechargement de la page
 
@@ -23,18 +27,28 @@ function inscription(event) {
         return;
     }
 
-    fetch(`http://localhost:5000/register/${username}/${password}`, {
+    fetch(`http://${serverIP}:5000/register/${username}/${password}`, {
         method: "POST"
     })
     .then(response => response.json())
     .then(data => {
         console.log("Réponse de l'API :", data);
-        //alert(`Inscription réussie pour ${username}`);
-        // Redirection
-        window.location.href = "accueil.html"; 
+
+        if (data.status === "error") {
+            alert(data.message);
+        } else if (data.status === "registered") {
+            sessionStorage.setItem('username', username);
+            sessionStorage.setItem('password', password);
+            alert(`Inscription réussie pour ${username}`);
+            window.location.href = "accueil.html";
+        }
     })
     .catch(error => {
         console.error("Erreur :", error);
         alert("Erreur lors de la connexion à l'API");
     });
+}
+
+function back(){
+    window.location.href = 'connexion.html';
 }

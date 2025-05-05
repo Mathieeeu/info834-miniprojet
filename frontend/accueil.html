@@ -10,15 +10,16 @@
 <body>
     <h1>Accueil</h1>
     <p>Bonjour <span id="username"></span> !</p>
-    <p>Utilisateur en ligne<p>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const username = sessionStorage.getItem('username');
-                console.log(username);
-                document.getElementById('username').textContent = username || "invité";
-            });
-        </script>
+    <button id="decoButton" onclick="deconnexion()">Déconnexion</button>
+    <p>Utilisateurs connectés : <ul id="online_user_list"></ul> </p>
+    <p>Messages : <ul id="message_list"></ul> </p>
+
+    <div id="sendMessage">
+        <form id = "Form" onsubmit="envoyer(event)">
+            <input type="text" placeholder="Message" required name = "message" id = "message"/>
+            <input type="submit" id="submit" value="Envoyer" />
+        </form>
+    </div>
+
 </body>
-
-
 </html>

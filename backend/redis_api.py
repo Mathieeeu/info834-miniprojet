@@ -32,7 +32,6 @@ def register(username: str, password: str) -> dict:
     r.sadd("online_users", username)
     return {"status": "registered", "username": username}
 
-
 def login(username: str, password: str) -> dict:
     user_key = f"user:{username}"
     if not r.exists(user_key):
