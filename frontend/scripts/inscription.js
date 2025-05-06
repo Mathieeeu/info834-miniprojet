@@ -1,6 +1,4 @@
-//============================================================================
-const serverIP = "192.168.43.110"; // ben c'est l'adresse IP du serveur     ||
-//============================================================================
+import { serverIP } from './config.js';
 
 function inscription(event) {
     event.preventDefault(); // Empêche le rechargement de la page
@@ -49,6 +47,11 @@ function inscription(event) {
     });
 }
 
-function back(){
+function goToConnexion(){
     window.location.href = 'connexion.html';
 }
+window.goToConnexion = goToConnexion;
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    inscription(event);
+});

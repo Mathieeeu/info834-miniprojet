@@ -1,0 +1,52 @@
+:root {
+    /* Variables globales pour les couleurs : */
+    --background-color: #f0f0f0;
+    --text-color: #333333;
+    --primary-color: rgb(213, 206, 196);
+    --primary-hover-color: #496e1c;
+    --secondary-color: #f8f9fa;
+    --message-sent-color: #d1e7dd;
+    --message-recieved-color: #f8d7da;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.h2{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.SubmitBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+}
+
+.SubmitButton{
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 25px;
+}
+.SubmitButton:hover{
+    background-color: var(--primary-hover-color);
+}
+
+.Links{
+    color: var(--primary-color);
+    text-decoration: none;
+}

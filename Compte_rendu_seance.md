@@ -52,4 +52,29 @@
 
 - Chat global !!!!
     - Formulaire pour envoie de message (ils sont bien enregistrés dans mongodb)
-    - Récupération des messages envoyées
+    - Récupération des messages envoyées (problème avec le format retourné des messages qui comportaient des ObjetcId et non des id simple)
+
+**A faire :**
+- Chat privé
+- Mise en forme du site
+
+
+## Séance 4 - 06/05/25
+
+**Membres présents :** Charlotte, Mathieu & Louna
+
+**Travail effectué :**
+- Restructuration des fichiers et création d'un fichier de script général 
+    - beaucoup d'erreur du à ça, notamment à cause des modules -> mettre sous la fonction _window.nomfonction = nomfonction;_
+    - on avait un listener pour deconnecter l'utilisateur correctement s'il fermait la page sans se deco et il pose des problème avec le sessionStorage lors du changement de page (il est appellé lors de l'import)
+- Page de chat personnel
+    - envoyer un message à un utilisateur
+    - voir les messages enchangés avec un utilisateur choisi dans la liste des utilisateur
+- CSS des pages
+    - connexion
+    - inscription
+    - accueil
+
+**Amélioration possible :**
+- barre de recherche des gens
+- trouver une façon de déconnecter si l'onglet est fermé sans réinitialiser la sessionStorage

@@ -1,6 +1,4 @@
-//============================================================================
-const serverIP = "192.168.43.110"; // ben c'est l'adresse IP du serveur     ||
-//============================================================================
+import { serverIP } from './config.js';
 
 function connexion(event) {
     event.preventDefault(); // Empêche le rechargement de la page
@@ -20,7 +18,9 @@ function connexion(event) {
         return;
     }
 
-    fetch(`http://${serverIP}:5000/login/${username}/${password}`, {
+
+    const request = `http://${serverIP}:5000/login/${username}/${password}`;
+    fetch(request, {
         method: "POST"
     })
     .then(response => response.json())
@@ -42,4 +42,6 @@ function connexion(event) {
     });
 }
 
-
+document.querySelector('form').addEventListener('submit', function(event) {
+    connexion(event);
+});

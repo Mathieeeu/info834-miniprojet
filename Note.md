@@ -1,10 +1,11 @@
 Redis
 - historique de connexion 
 - savoir qui est connecté
+- user (login, mdp)
+
 
 MongoDB (en ligne avec Atlas qui marche pas sur le réseau de l'unvi :) )
 - message (date, destinateur, emetteur, contenu)
-- user (login, mdp)
 
 Front
 - html/PHP
@@ -12,11 +13,11 @@ Front
 -> comme le projet d'achat et de vente
 
 Fonctionnalité
-- chat global
+- chat global ✅
 - chat "privé"
 - stat (connexion)
 - replica set
-- historique des conversations
+- historique des conversations ✅
 - Profil avec stats de la personne
 
 Question

@@ -3,20 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./accueil.js"></script>
+    <title>ChatOQP - Accueil</title>
+    <link rel="icon" href="./images/icons/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/accueil.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <script type="module" src="./scripts/fonctions.js"></script>
+    <script type="module" src="./scripts/accueil.js"></script>
 </head>
 
 <body>
-    <h1>Accueil</h1>
-    <p>Bonjour <span id="username"></span> !</p>
-    <button id="decoButton" onclick="deconnexion()">Déconnexion</button>
-    <p>Utilisateurs connectés : <ul id="online_user_list"></ul> </p>
-    <p>Messages : <ul id="message_list"></ul> </p>
+    
+    <div id="navigation">
+        <h1>ChatOQP</h1>
+        <p>Bonjour <span id="username"></span> !</p>
+        <button id="chatPriveButton" onclick="goToConversation()">Conversations privées</button>
+        <button id="decoButton" onclick="deconnexion()">Déconnexion</button>
+        <p>Utilisateurs connectés : <ul id="online_user_list"></ul> </p>
+    </div>
 
-    <div id="sendMessage">
-        <form id = "Form" onsubmit="envoyer(event)">
-            <input type="text" placeholder="Message" required name = "message" id = "message"/>
+    <div id="container">
+        <div id="chat"> 
+            <h2>Chat général :</h2>
+            <ul id="message_list"></ul>
+        </div>
+        <form id = "Form" onsubmit="envoyer(event, 'accueil')">
+            <input type="text" placeholder="Message" required name="message" id="message"/>
             <input type="submit" id="submit" value="Envoyer" />
         </form>
     </div>

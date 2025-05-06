@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./connexion.js"></script>
+    <title>ChatOQP - Connexion</title>
+    <link rel="icon" href="./images/icons/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/connexion.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <script type="module" src="./scripts/connexion.js" defer></script>
 </head>
 
 <body>
     <div class ="connexion">
         <div class="content">
             <h2>Connexion</h2>
-            <form onsubmit="connexion(event)">
-                <input type="text" placeholder="Identifiant" required name = "username" id = "username"/>
-                <input type="password" placeholder="Mot de passe" required name = "password" id = "password"/>
-                <input type="submit" id="submit" value="Valider" />
+            <form>
+                <input class="SubmitBar" type="text" placeholder="Identifiant" required name = "username" id = "username"/>
+                <input class="SubmitBar" type="password" placeholder="Mot de passe" required name = "password" id = "password"/>
+                <input type="submit" class="SubmitButton" value="Valider" />
             </form>
-            <a href = "inscription.html"><p> Pas encore de compte ?</p></a>
+            <a class= "Links" href = "inscription.html"><p> Pas encore de compte ?</p></a>
          </div>
-    </div>    
+    </div>
 </body>
-
-
 </html>
 
 

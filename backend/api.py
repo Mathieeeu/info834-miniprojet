@@ -75,6 +75,11 @@ if __name__ == "__main__":
     def get_messages_route(reciever_name):
         reciever_name = reciever_name.lower()
         return jsonify(mongodb_api.get_messages(reciever_name))
+    
+    # > curl -X GET http://localhost:5000/get_private_messages/<sender_name>/<reciever_name>
+    @app.route('/get_private_messages/<sender>/<reciever>', methods=['GET'])
+    def get_private_messages_route(sender, reciever):
+        return jsonify(mongodb_api.get_private_messages(sender.lower(), reciever.lower()))
 
     # > curl -X GET http://localhost:5000/delete_messages/<sender_name>
     @app.route('/delete_messages_from_user/<sender_name>', methods=['GET'])

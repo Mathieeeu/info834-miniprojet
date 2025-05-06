@@ -18,6 +18,7 @@ MONGO_OPTIONS = os.getenv("MONGO_OPTIONS")
 
 # Connexion à la base
 try:
+    print("Connexion à MongoDB...")
     uri = f"{MONGO_SCHEME}://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_ADDRESS}/{MONGO_DB}?{MONGO_OPTIONS}"
     client = MongoClient(uri)
     db = client[MONGO_DB]
@@ -77,6 +78,25 @@ def get_messages(reciever_name: str):
     except Exception as e:
         print(f"Erreur lors de la récupération des messages: {e}")
         return None
+    
+def get_private_messages(sender, reciever):
+    try:
+        messages = db.messages.find({"$or": [
+                {"sender": sender, "reciever": reciever},
+                {"sender": reciever, "reciever": sender}
+            ]}).sort("timestamp", 1)
+        res = {}
+        for message in messages:
+            res[str(message["_id"])] = {
+                "text": message["text"],
+                "sender": message["sender"],
+                "timestamp": message["timestamp"],
+                "reciever": message["reciever"]
+            }
+        return res
+    except Exception as e:
+        print(f"Erreur lors de la récupération des messages privés : {e}")
+        return []
     
 def delete_messages_from_user(sender_name: str):
     """

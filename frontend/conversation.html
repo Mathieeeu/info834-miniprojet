@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatOQP - Conversation</title>
+    <link rel="icon" href="./images/icons/icon.ico" type="image/x-icon">
+    <script type="module" src="./scripts/fonctions.js"></script>
+    <script type="module" src="./scripts/conversation.js"></script>
+</head>
+
+<body>
+    <h1>Conversation privée</h1>
+    <p>Bonjour <span id="username"></span> !</p>
+    <button id="accueilButton" onclick="goToAccueil()">Chat général</button>
+    <button id="decoButton" onclick="deconnexion()">Déconnexion</button>
+    <p>Utilisateurs : <ul id="user_list"></ul></p>
+    <p>Conversations récentes :<ul id="contact_list"></ul></p>
+    <p>Messages de <span id="contact-name"></span>: <ul id="message_list"></ul> </p>
+
+    <div id="sendMessage">
+        <form id = "Form" onsubmit="envoyer(event, 'conversation')">
+            <input type="text" placeholder="Message" required name="message" id="message"/>
+            <input type="submit" id="submit" value="Envoyer" />
+        </form>
+    </div>
+</body>
+</html>
