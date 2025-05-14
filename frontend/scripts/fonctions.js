@@ -271,38 +271,20 @@ export function addEventListeners(page) {
             }, userListUpdateInterval);
         }
 
+        // Statistiques
         updateStatistiques();
         setInterval(() => {
             updateStatistiques();
         }, statsUpdateInterval);
-        }
-    );
+
+        // Mettre la scrollbar en bas une fois que c'est chargé
+        setTimeout(() => {
+            const chatbox = document.getElementById('message_list');
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }, 500);
+    });
 
     // Event lorsque l'utilisateur ferme la page
     window.addEventListener('beforeunload', handleUserLeaving);
     window.addEventListener('unload', handleUserLeaving);
 }
-
-
-/*
-//Statistique
-if(page === "statistique"){
-    var connexionRequest = `http://${serverIP}:5000/get_best_sender`;
-    fetch(connexionRequest, {
-        method: "GET"
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data._id) {
-                console.log(data);
-                document.getElementById('best_sender_username').textContent = data._id;
-                document.getElementById('best_sender_count').textContent = data.count;
-        } else {
-            alert("Aucun message trouvé.");
-        }
-    })
-    .catch(error => {
-        console.error("Erreur lors de la récupération du top sender :", error);
-    })
-}
-*/

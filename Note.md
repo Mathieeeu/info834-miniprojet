@@ -14,8 +14,8 @@ Front
 
 Fonctionnalité
 - chat global ✅
-- chat "privé"
-- stat (connexion)
+- chat "privé"✅
+- stat (connexion)✅
 - replica set
 - historique des conversations ✅
 - Profil avec stats de la personne

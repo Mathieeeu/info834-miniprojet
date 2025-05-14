@@ -87,5 +87,8 @@
 **Travail effectué :**
 - Fin du CSS
 - Rapport
+- Ajout de statistiques
+    - utilisateur le + bavard
+    - utilisateur le + solicité ("everyone" ne pouvant pas être retourné)
 
 - Présentation
