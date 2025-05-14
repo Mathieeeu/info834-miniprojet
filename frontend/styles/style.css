@@ -60,7 +60,7 @@ body {
     background-color: var(--background-color);
     transition: background 0.2s, color 0.2s;
     border-radius: 5px;
-    
+    margin-bottom: 5px;
 }
 
 /* Bouton actif */

@@ -9,8 +9,10 @@ body{
     grid-column: 1;
     grid-row: 1 / span 2;
     background-color: var(--primary-color);
-    height: 100vh;
     padding: 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 #container{
@@ -37,13 +39,14 @@ body{
     border-radius: 10px;
     padding: 12px 12px;
     list-style-type: none;
-    
+    background-color: var(--background-color);
 }
+
 #user_list ul{
     height: 80vh;
     margin-top: 10px;
-    
 }
+
 #user_list li{
     padding: 10px;
     border-radius: 10px;
@@ -63,8 +66,16 @@ body{
     color: var(--text-color);
 }
 
+#div_stats p.stat-name{
+    font-weight: 600;
+    padding-left: 15px;
+}
+
+#div_stats p.stat-value{
+    padding-left: 25px;
+}
+
 #sendMessage{
-    
     border-radius: 10px;
     height: 10vh;
 }
@@ -73,14 +84,14 @@ body{
     text-align: center;
     font-size: 2rem;
     font-weight: 600;
-    margin: 20px;
+    margin: 10px;
     color: var(--text-color);
 }
 
 #message_list{
     list-style-type: none;
     height: 80vh;
-    overflow-y: auto;
+    overflow-y: auto;    
     overflow-x: hidden;
 }
 
@@ -151,7 +162,7 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: var(--background-color);
+    background-color: var(--secondary-color);
     border-radius: 10px;
     margin: 10px;
     

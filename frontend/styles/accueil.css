@@ -9,8 +9,10 @@ body{
     grid-column: 1;
     grid-row: 1 / span 2;
     background-color: var(--primary-color);
-    height: 100vh;
     padding: 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 #container{
@@ -20,7 +22,15 @@ body{
     height: 100vh;
     align-items: center;
     justify-content: center;
-    
+}
+
+#div_stats p.stat-name{
+    font-weight: 600;
+    padding-left: 15px;
+}
+
+#div_stats p.stat-value{
+    padding-left: 25px;
 }
 
 #chat{
@@ -50,6 +60,7 @@ body{
     height: 75vh;
     overflow-y: auto;
     overflow-x: hidden;
+    
 }
 
 #message_list li{
@@ -119,7 +130,7 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: var(--background-color);
+    background-color: var(--secondary-color);
     border-radius: 10px;
     margin: 10px;
 }
@@ -132,4 +143,6 @@ body{
     padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
+    
 }
+

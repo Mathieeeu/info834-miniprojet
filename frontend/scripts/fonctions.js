@@ -1,4 +1,4 @@
-import { serverIP } from './config.js';
+import { serverIP, userListUpdateInterval, messageListUpdateInterval, statsUpdateInterval } from './config.js';
 
 export function goToConversation(){
     window.location.href = "conversation.html";
@@ -118,7 +118,7 @@ export function updateMessageList(page){
     } else if (page === "conversation") {
         const destinataire = sessionStorage.getItem('destinataire');
         if (!destinataire) {
-            var request = `http://${serverIP}:5000/get_messages/${username}`
+            var request = "";
         }
         else{
             var request = `http://${serverIP}:5000/get_private_messages/${username}/${destinataire}`;
@@ -129,44 +129,99 @@ export function updateMessageList(page){
         return;
     }
 
-    fetch(request, {
+    if (request === "") {
+        const contactName = document.getElementById('contact-name');
+        contactName.textContent = "Sélectionnez un utilisateur pour voir la conversation";
+        console.error("Aucun destinataire sélectionné.");
+        const sendMessage = document.getElementById('sendMessage');
+        sendMessage.style.visibility = "hidden";
+    }
+    else {
+        if (page === "conversation") {
+            const contactName = document.getElementById('contact-name');
+            const destinataire = sessionStorage.getItem('destinataire');
+            contactName.textContent = "Conversation avec " + destinataire;
+            const sendMessage = document.getElementById('sendMessage');
+            sendMessage.style.visibility = "visible";
+        }
+        
+        fetch(request, {
+            method: "GET"
+        })
+        .then(response => response.json())
+        .then(data => {
+            const messageList = document.getElementById('message_list');
+            messageList.innerHTML = ''; 
+            let previousDate = null;
+
+            Object.values(data).forEach(msg => {
+                const messageItem = document.createElement('li');
+                const fullTimestamp = msg.timestamp;
+                const currentDate = fullTimestamp.slice(0, 10); // Format: YYYY-MM-DD
+
+                // séparateur de date quand la date change
+                if (currentDate !== previousDate) {
+                    const dateSeparator = document.createElement('li');
+                    dateSeparator.classList.add('date-separator');
+                    dateSeparator.textContent = new Date(currentDate).toLocaleDateString();
+                    messageList.appendChild(dateSeparator);
+                    previousDate = currentDate;
+                }
+
+                if (msg.sender === username) {
+                    messageItem.classList.add('message-sent');
+                } else {
+                    messageItem.classList.add('message-received');
+                }
+
+                const timestampSansSecondes = fullTimestamp.slice(11, 16);
+                messageItem.innerHTML = `<span class="author">${msg.sender}<br></span><span class="msgTxt">${msg.text}</span><span class="timestamp"><br>${timestampSansSecondes}</span>`;
+                messageList.appendChild(messageItem);
+            });
+        })
+        .catch(error => {
+            console.error("Erreur lors de la récupération des messages :", error);
+            document.getElementById('message_list').textContent = "Erreur de connexion à l'API.";
+        });
+    }
+}
+
+export function updateStatistiques(){
+    var connexionRequest = `http://${serverIP}:5000/get_best_sender`;
+    fetch(connexionRequest, {
         method: "GET"
     })
     .then(response => response.json())
     .then(data => {
-        const messageList = document.getElementById('message_list');
-        messageList.innerHTML = ''; 
-        let previousDate = null;
-
-        Object.values(data).forEach(msg => {
-            const messageItem = document.createElement('li');
-            const fullTimestamp = msg.timestamp;
-            const currentDate = fullTimestamp.slice(0, 10); // Format: YYYY-MM-DD
-
-            // séparateur de date quand la date change
-            if (currentDate !== previousDate) {
-                const dateSeparator = document.createElement('li');
-                dateSeparator.classList.add('date-separator');
-                dateSeparator.textContent = new Date(currentDate).toLocaleDateString();
-                messageList.appendChild(dateSeparator);
-                previousDate = currentDate;
-            }
-
-            if (msg.sender === username) {
-                messageItem.classList.add('message-sent');
-            } else {
-                messageItem.classList.add('message-received');
-            }
-
-            const timestampSansSecondes = fullTimestamp.slice(11, 16);
-            messageItem.innerHTML = `<span class="author">${msg.sender}<br></span><span class="msgTxt">${msg.text}</span><span class="timestamp"><br>${timestampSansSecondes}</span>`;
-            messageList.appendChild(messageItem);
-        });
+        if (data._id) {
+                console.log(data);
+                document.getElementById('best_sender_username').textContent = data._id;
+                document.getElementById('best_sender_count').textContent = data.count;
+        } else {
+            alert("Aucun message trouvé.");
+        }
     })
     .catch(error => {
-        console.error("Erreur lors de la récupération des messages :", error);
-        document.getElementById('message_list').textContent = "Erreur de connexion à l'API.";
-    });
+        console.error("Erreur lors de la récupération du top sender :", error);
+    })
+
+    var connexionRequest = `http://${serverIP}:5000/get_best_reciever`;
+    fetch(connexionRequest, {
+        method: "GET"
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data._id) {
+                console.log(data);
+                document.getElementById('best_reciever_username').textContent = data._id;
+                document.getElementById('best_reciever_count').textContent = data.count;
+        } else {
+            alert("Aucun message trouvé.");
+        }
+    })
+    .catch(error => {
+        console.error("Erreur lors de la récupération du top reciever :", error);
+    })
 }
 
 export function addEventListeners(page) {
@@ -194,9 +249,6 @@ export function addEventListeners(page) {
         }
         document.getElementById('username').textContent = username;
 
-        var userListUpdateInterval = 5000;
-        var messageListUpdateInterval = 20000;
-
         // Liste des utilisateurs en ligne
         if (page === "accueil") {
             updateOnlineUserList();
@@ -218,9 +270,39 @@ export function addEventListeners(page) {
                 updateUserList();
             }, userListUpdateInterval);
         }
-    });
+
+        updateStatistiques();
+        setInterval(() => {
+            updateStatistiques();
+        }, statsUpdateInterval);
+        }
+    );
 
     // Event lorsque l'utilisateur ferme la page
     window.addEventListener('beforeunload', handleUserLeaving);
     window.addEventListener('unload', handleUserLeaving);
 }
+
+
+/*
+//Statistique
+if(page === "statistique"){
+    var connexionRequest = `http://${serverIP}:5000/get_best_sender`;
+    fetch(connexionRequest, {
+        method: "GET"
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data._id) {
+                console.log(data);
+                document.getElementById('best_sender_username').textContent = data._id;
+                document.getElementById('best_sender_count').textContent = data.count;
+        } else {
+            alert("Aucun message trouvé.");
+        }
+    })
+    .catch(error => {
+        console.error("Erreur lors de la récupération du top sender :", error);
+    })
+}
+*/

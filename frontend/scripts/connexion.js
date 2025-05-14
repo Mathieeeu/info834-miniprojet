@@ -18,7 +18,6 @@ function connexion(event) {
         return;
     }
 
-
     const request = `http://${serverIP}:5000/login/${username}/${password}`;
     fetch(request, {
         method: "POST"

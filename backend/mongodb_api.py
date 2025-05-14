@@ -98,6 +98,39 @@ def get_private_messages(sender, reciever):
         print(f"Erreur lors de la récupération des messages privés : {e}")
         return []
     
+def get_best_sender():
+    """
+    Renvoie l'utilisateur qui a envoyé le plus de message
+    """
+    try:
+        pipeline = [
+            {"$group": {"_id": "$sender", "count": {"$sum": 1}}},
+            {"$sort": {"count": -1}},
+            {"$limit": 1}
+        ]
+        result = list(db.messages.aggregate(pipeline))
+        return result[0] if result else {"_id": None, "count": 0}
+    except Exception as e:
+        print(f"Erreur lors de la récupération du top sender : {e}")
+        return {"_id": None, "count": 0}
+    
+def get_best_reciever():
+    """
+    Renvoie l'utilisateur qui a reçoit le plus de message
+    """
+    try:
+        pipeline = [
+            {"$match": {"reciever": {"$ne": "everyone"}}},
+            {"$group": {"_id": "$reciever", "count": {"$sum": 1}}},
+            {"$sort": {"count": -1}},
+            {"$limit": 1}
+        ]
+        result = list(db.messages.aggregate(pipeline))
+        return result[0] if result else {"_id": None, "count": 0}
+    except Exception as e:
+        print(f"Erreur lors de la récupération du top reciever : {e}")
+        return {"_id": None, "count": 0}
+    
 def delete_messages_from_user(sender_name: str):
     """
     Supprime sans vergogne les messages de quelqu'un
