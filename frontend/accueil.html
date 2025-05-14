@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatOQP - Accueil</title>
     <link rel="icon" href="./images/icons/icon.ico" type="image/x-icon">
+    <link  href="./images/icons/envoyer-un-mail.png">
     <link rel="stylesheet" href="./styles/accueil.css">
     <link rel="stylesheet" href="./styles/style.css">
     <script type="module" src="./scripts/fonctions.js"></script>
@@ -16,9 +17,11 @@
     <div id="navigation">
         <h1>ChatOQP</h1>
         <p>Bonjour <span id="username"></span> !</p>
-        <button id="chatPriveButton" onclick="goToConversation()">Conversations privées</button>
-        <button id="decoButton" onclick="deconnexion()">Déconnexion</button>
+        <button class="NavButton" id="chatPriveButton" onclick="goToConversation()">Conversations privées</button>
+        <button class="NavButton active" id="accueilButton" onclick="goToAccueil()">Chat général</button>
+        
         <p>Utilisateurs connectés : <ul id="online_user_list"></ul> </p>
+        <button id="decoButton" onclick="deconnexion()">Déconnexion</button>
     </div>
 
     <div id="container">

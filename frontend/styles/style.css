@@ -3,10 +3,10 @@
     --background-color: #f0f0f0;
     --text-color: #333333;
     --primary-color: rgb(213, 206, 196);
-    --primary-hover-color: #496e1c;
+    --primary-hover-color: #F0D780;
     --secondary-color: #f8f9fa;
-    --message-sent-color: #d1e7dd;
-    --message-recieved-color: #f8d7da;
+    --message-sent-color: #F0D780;
+    --message-recieved-color: #FFF6BE;
 }
 
 body {
@@ -27,7 +27,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 5px;
     padding: 10px;
     background-color: var(--secondary-color);
     border-radius: 5px;
@@ -49,4 +49,47 @@ body {
 .Links{
     color: var(--primary-color);
     text-decoration: none;
+}
+
+.NavButton {
+    color: var(--text-color);
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 12px 12px;
+    background-color: var(--background-color);
+    transition: background 0.2s, color 0.2s;
+    border-radius: 5px;
+    
+}
+
+/* Bouton actif */
+.NavButton.active {
+    background-color: var(--primary-hover-color);
+    color: #fff;
+}
+
+/* Hover sur les boutons */
+.NavButton:hover {
+    background-color: var(--message-sent-color);
+    color: var(--text-color);
+
+}
+
+#decoButton {
+    width: 100%;
+    background-color: var(--text-color);
+    color: var(--background-color);
+    border: none;
+    padding: 12px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s;
+    
+}
+
+#decoButton:hover {
+    background-color: var(--primary-hover-color);
+    color:var(--text-color);
 }
