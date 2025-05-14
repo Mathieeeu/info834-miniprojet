@@ -78,3 +78,14 @@
 **Amélioration possible :**
 - barre de recherche des gens
 - trouver une façon de déconnecter si l'onglet est fermé sans réinitialiser la sessionStorage
+
+
+## Séance 5 - 14/05/25
+
+**Membres présents :** Charlotte, Mathieu & Louna
+
+**Travail effectué :**
+- Fin du CSS
+- Rapport
+
+- Présentation
