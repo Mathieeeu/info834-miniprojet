@@ -10,7 +10,7 @@ body{
     grid-row: 1 / span 2;
     background-color: var(--primary-color);
     height: 100vh;
-    
+    padding: 12px 12px;
 }
 
 #container{
@@ -20,13 +20,15 @@ body{
     height: 100vh;
     align-items: center;
     justify-content: center;
+    
 }
 
 #chat{
     background-color: var(--secondary-color);
-    margin: 50px;
+    margin: 5px;
     width: 75%;
     border-radius: 10px;
+    height: 85vh;
 }
 
 #chat h2 {
@@ -36,10 +38,16 @@ body{
     margin: 20px;
     color: var(--text-color);
 }
+#form{
+    border-radius: 10px;
+    height: 10vh;
+}
+
+
 
 #message_list{
     list-style-type: none;
-    height: 80vh;
+    height: 75vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
